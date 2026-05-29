@@ -11,6 +11,7 @@ cobertura varchar(120) not null,
 qtd int not null,
 peso decimal(10,2) not null,
 porcao int not null,
+preco decimal(10,2) not null,
 data_validade date not null,
 status enum ('Disponivel', 'Descartado') not null
 );

@@ -16,10 +16,10 @@ const prisma = new PrismaClient()
 const getSelectAllCandys = async function () {
     try{
         //Script sql
-        let sql = `select * from tbl_doce order by desc`
+        let sql = `select * from tbl_doce order by id_doce desc`
 
         //Executa no bc o script sql
-        let result = await prima.$queryRawUnsafe(sql)
+        let result = await prisma.$queryRawUnsafe(sql)
 
         if(Array.isArray(result)){
             return result
@@ -64,6 +64,7 @@ const setInsertCandys = async function (doce) {
         qtd, 
         peso, 
         porcao, 
+        preco,
         data_validade, 
         status)
         VALUES (
@@ -75,6 +76,7 @@ const setInsertCandys = async function (doce) {
         '${doce.qtd}'
         '${doce.peso}'
         '${doce.porcao}'
+        '${doce.preco}'
         '${doce.data_validade}'
         '${doce.status}');`
 
@@ -101,7 +103,7 @@ const setUpdateCandys = async function (doce) {
         cobertura           =   '${doce.cobertura}'
         qtd                 =   '${doce.qtd}'
         peso                =   '${doce.peso}'
-        porcao              =   '${doce.porcao}'
+        preco               =   '${doce.preco}'
         data_validade       =   '${doce.data_validade}'
         status              =   '${doce.status}'
         where id_doce = ${doce.id_doce}`

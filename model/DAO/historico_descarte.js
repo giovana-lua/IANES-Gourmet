@@ -63,3 +63,8 @@ const getSelectAllDescartes = async function () {
         return false
     }
 }
+
+module.exports = {
+    setInsertDescarte,
+    getSelectAllDescartes
+}
