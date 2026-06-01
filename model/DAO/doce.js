@@ -49,7 +49,7 @@ const setInsertCandys = async function (doce) {
         qtd: doce.qtd, 
         peso: doce.peso, 
         porcao: doce.porcao, 
-        preco: doce.preso,
+        preco: doce.preco,
         data_validade: doce.data_validade, 
         status: doce.status || 'Disponível'
        
@@ -57,6 +57,7 @@ const setInsertCandys = async function (doce) {
        
         return result.length > 0
     } catch (error) {
+        console.log("Qual erro?:", error)
         return false
     }
 }
@@ -65,28 +66,28 @@ const setUpdateCandys = async function (doce) {
 
     try{
 
-        let sql = `update tbl_doce set
-        tipo,               =   '${doce.tipo}',
-        nome                =   '${doce.nome}',
-        massa               =   '${doce.massa}'
-        recheio             =   '${doce.recheio}'
-        cobertura           =   '${doce.cobertura}'
-        qtd                 =   '${doce.qtd}'
-        peso                =   '${doce.peso}'
-        preco               =   '${doce.preco}'
-        data_validade       =   '${doce.data_validade}'
-        status              =   '${doce.status}'
-        where id_doce = ${doce.id_doce}`
+        let result = await db('tbl_doce').where('id_doce', doce.id_doce).update({
 
+        tipo: doce.tipo,             
+        nome: doce.nome,  
+        massa: doce.massa,          
+        recheio: doce.recheio,            
+        cobertura: doce.cobertura,           
+        qtd: Number(doce.qtd),
+        peso: Number(doce.peso), 
+        porcao: Number(doce.porcao),            
+        preco: Number(doce.preco),     
+        data_validade: doce.data_validade,  
+        status: doce.status
+        })
         
-        let result = await prisma.$executeRawUnsafe(sql)
-
-        if(result)
+        if(result !== undefined){
             return true
-        else
+        }
         return false
-        
+            
 } catch (error) {
+   console.log(error.sqlMessage || error)
     return false
 }
 
@@ -95,15 +96,10 @@ const setUpdateCandys = async function (doce) {
 const setDeleteCandys = async function (id) {
     
     try {
-        let sql = `delete from tbl_doce where id_doce = ${id}`
+        let result = await db('tbl_doce').where('id_doce', id).del()
 
-
-        let result = await prisma.$executeRawUnsafe(sql)
-
-        if(result > 0)
-            return true
-        else 
-        return false 
+            return result > 0
+        
 
     } catch (error){
         return false

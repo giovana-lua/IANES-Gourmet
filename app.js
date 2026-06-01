@@ -61,7 +61,35 @@ app.post('/v1/doceria/doce', cors(), bodyParserJSON, async function (request, re
        //Chama a função da controller para inserir o doce, enviamos os dados do body e o content-type
     let doce = await controllerDoce.inserirDoce(dadosBody, contentType)
 
-    response.status(doce.status)
+    response.status(doce.status_code)
     response.json(doce)
 
+})
+
+
+
+app.put('/v1/doceria/doce/:id', cors(), bodyParserJSON, async function (request, response) {
+
+    let dadosBody = request.body
+
+    let idDoce = request.params.id
+
+    let contentType = request.headers['content-type']
+
+    let doce = await controllerDoce.atualizarDoce(dadosBody, idDoce, contentType)
+
+    response.status(doce.status_code).json(doce)
+    
+})
+
+//apaga um doce
+app.delete('/v1/doceria/doce/:id', cors(), async function (request, response) {
+
+    let idDoce = request.params.id
+
+    let result = await controllerDoce.excluirDoce(idDoce)
+
+    response.status(result.status_code)
+    response.json(result)
+    
 })
