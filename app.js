@@ -43,8 +43,25 @@ app.get('/v1/doceria/doce/:id', cors(), async function (request, response) {
     let doceId = request.params.id
 
     //chama a fun'ão da controller para retornar o doce pelo id
-    let doce = controllerDoce.buscarDoceId(doceId)
+    let doce = await controllerDoce.buscarDoceId(doceId)
 
     response.status(doce.status_code)
     response.json(doce)
+})
+
+//insere um doce no banco de dados
+app.post('/v1/doceria/doce', cors(), bodyParserJSON, async function (request, response) {
+    
+    //recebe o objeto JSON pelo body da requisição
+    let dadosBody = request.body
+
+     //recebe o content type da requisição
+     let contentType = request.headers['content-type']
+
+       //Chama a função da controller para inserir o doce, enviamos os dados do body e o content-type
+    let doce = await controllerDoce.inserirDoce(dadosBody, contentType)
+
+    response.status(doce.status)
+    response.json(doce)
+
 })
