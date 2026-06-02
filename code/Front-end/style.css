@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: antiquewhite;
+    width: 100%;
+    height: 100px;
+}
+
+.logo {
+    background-color: beige;
+    width: 100px;
+    height: 100px;
+
+}
+main{
+    background-color: rosybrown;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    
+    
+}
+.conteudo{
+    background-color: #D8B69F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    height: 700px;
+    border-radius: 14px;
+}
+
+input{
+    background-color: antiquewhite;
+    border-color: rosybrown;
+    border-radius: 8px;
+    gap: 20px;
+}

@@ -19,7 +19,7 @@ app.use((request, response, next) => {
 
 })
 
-const controllerDoce = require('./controller/controller_doce.js')
+const controllerDoce = require('./code/back-end/controller/controller_doce.js')
 
 //Retorna uma lista de doces 
 app.get('/v1/doceria/doce', cors(), async function (request, response) {
@@ -92,4 +92,14 @@ app.delete('/v1/doceria/doce/:id', cors(), async function (request, response) {
     response.status(result.status_code)
     response.json(result)
     
+})
+
+const controllerFuncionario = require('./code/back-end/controller/controller_funcionario.js')
+
+app.post('/v1/doceria/login', cors(), express.json(), async function(request, response){
+    let dadosBody = request.body
+
+    let resultado = await controllerFuncionario.fazerLogin(dadosBody)
+
+    response.status(resultado.status_code).json(resultado)
 })

@@ -134,7 +134,7 @@ const inserirDoce = async function (doce) {
 
             let doceAtualizado = await doceDAO.setUpdateCandys(doce)
 
-            console.log("Retorno da Model Knex:", doceAtualizado)
+            //console.log("Retorno da Model Knex:", doceAtualizado)
             if(doceAtualizado) {
                 return {status: true, status_code: 200, message: "Doce atualizado!"}
             }else {
@@ -143,7 +143,7 @@ const inserirDoce = async function (doce) {
                 
             }
         }catch(error){
-            console.log(error)
+            //console.log(error)
             return MESSAGE.ERROR_INTERNAL_SERVER_CONTROLLER
         }
     }

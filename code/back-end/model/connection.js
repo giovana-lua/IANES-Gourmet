@@ -5,7 +5,7 @@ const db = knex({
     connection: {
         host: 'localhost',
         user: 'root',
-        password: 'admin1234',
+        password: '12345678',
         database: 'db_doceria',
         port: 3306
     },
